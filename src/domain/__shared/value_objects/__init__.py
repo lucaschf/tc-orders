@@ -1,3 +1,4 @@
+from .cpf import CPF, InvalidCPFError
 from .email_address import EmailAddress, InvalidEmailError
 from .external_entity_id import ExternalEntityId, InvalidExternalIdError
 from .unique_entity_id import InvalidUniqueEntityIdError, UniqueEntityId
@@ -11,4 +12,6 @@ __all__ = [
     "InvalidUniqueEntityIdError",
     "UniqueEntityId",
     "ValueObject",
+    "CPF",
+    "InvalidCPFError",
 ]
