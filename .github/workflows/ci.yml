@@ -1,0 +1,46 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  ci_lint_cc_tests:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.12
+    services:
+      mongodb:
+        image: mongo:7.0.0
+        ports:
+          - 27017:27017
+    env:
+      MONGO_HOST: mongodb://localhost:27017/
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update apt-get
+        run: apt-get update
+
+      - name: Install libgl1-mesa-glx
+        run: apt-get install -y libgl1-mesa-glx
+
+      - name: Update pip
+        run: pip install -U pip
+
+      - name: Install poetry version 1.8.3
+        run: pip install poetry==1.8.3
+
+      - name: Configure poetry
+        run: poetry config virtualenvs.create false
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run make cc
+        run: make cc
+
+      - name: Run make lint-check
+        run: make lint-check
+
+      - name: Run make test
+        run: make test
