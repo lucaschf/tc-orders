@@ -5,7 +5,7 @@ from .settings import Settings
 
 ENV_FILENAMES = {
     Environment.DEV.value: (".env",),
-    Environment.PROD.value: (".env",),
+    Environment.PROD.value: (".env.prod",),
     Environment.TEST.value: (".env.test",),
 }
 
