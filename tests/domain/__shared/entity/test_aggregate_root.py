@@ -13,21 +13,21 @@ from src.domain.__shared.validator import (
 from src.domain.__shared.value_objects import ExternalEntityId
 
 
-@dataclass(slots=True)
+@dataclass(slots=True, frozen=True)
 class StubEntity(AggregateRoot):
     def validate(self) -> ValidationResult:  # noqa: D102
         return ValidationResult(is_valid=True)
 
 
 def test_aggregate_root_creation() -> None:
-    aggregate_root = StubEntity(_external_id=ExternalEntityId())
+    aggregate_root = StubEntity(external_id=ExternalEntityId())
     assert aggregate_root.id is None
     assert isinstance(aggregate_root.external_id, ExternalEntityId)
     assert isinstance(aggregate_root.created_at, datetime)
 
 
 def test_aggregate_root_validation_success() -> None:
-    aggregate_root = StubEntity(_external_id=ExternalEntityId())
+    aggregate_root = StubEntity(external_id=ExternalEntityId())
     aggregate_root.__post_init__()
 
 
@@ -56,7 +56,7 @@ def test_aggregate_root_calls_validate() -> None:
     mock_validate.assert_called_once()
 
 
-@dataclass(kw_only=True, slots=True)
+@dataclass(kw_only=True, slots=True, frozen=True)
 class StubCustomerEntity(AggregateRoot):
     name: str
 
@@ -85,7 +85,7 @@ def test_aggregate_root_accepts_empty_id() -> None:
 
 def test_aggregate_root_does_not_accepts_empty_external_id() -> None:
     with pytest.raises(ValidationError):
-        StubEntity(_external_id=None)  # type: ignore
+        StubEntity(external_id=None)  # type: ignore
 
 
 def test_aggregate_root_raises_exception_on_invalid_unique_id() -> None:
@@ -95,4 +95,4 @@ def test_aggregate_root_raises_exception_on_invalid_unique_id() -> None:
 
 def test_aggregate_root_raises_exception_on_invalid_external_id() -> None:
     with pytest.raises(ValidationError):
-        StubEntity(_external_id="invalid")  # type: ignore
+        StubEntity(external_id="invalid")  # type: ignore

@@ -8,34 +8,24 @@ from ..validator.validator_interface import ValidationResult
 from ..value_objects import ExternalEntityId, UniqueEntityId
 
 
-@dataclass(kw_only=True, slots=True)
+@dataclass(kw_only=True, slots=True, frozen=True)
 class AggregateRoot(ABC):
     """Base class for aggregate roots.
 
     Attributes:
         _id: The unique identifier for the aggregate root.
-        _external_id: The external identifier for the aggregate root.
-        _created_at: The timestamp when the aggregate root was created.
+        external_id: The external identifier for the aggregate root.
+        created_at: The timestamp when the aggregate root was created.
     """
 
     _id: Optional[UniqueEntityId] = None
-    _external_id: ExternalEntityId = field(default_factory=ExternalEntityId)
-    _created_at: datetime = field(default_factory=datetime.now)
+    external_id: ExternalEntityId = field(default_factory=ExternalEntityId)
+    created_at: datetime = field(default_factory=datetime.now)
 
     @property
     def id(self) -> Optional[UniqueEntityId]:
         """Property to get the unique identifier."""
         return self._id
-
-    @property
-    def external_id(self) -> ExternalEntityId:
-        """Property to get the external identifier."""
-        return self._external_id
-
-    @property
-    def created_at(self) -> datetime:
-        """Property to get the creation timestamp."""
-        return self._created_at
 
     @abstractmethod
     def validate(self) -> ValidationResult:
