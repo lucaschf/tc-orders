@@ -4,7 +4,7 @@ repos:
       - id: debug-check
         name: Check for debug calls
         description: This hook checks for any calls to breakpoint or print functions.
-        entry: sh -c 'find . -name "*.py" ! -path "./venv/*" -exec grep -P -Hn "(breakpoint|print)\\s*\\(" {} +; test $? -ne 0'
+        entry: sh -c 'find . -name "*.py" ! -path "./.venv/*" -exec grep -P -Hn "(breakpoint|print)\\s*\\(" {} +; test $? -ne 0'
         language: system
         types: [ python ]
 
