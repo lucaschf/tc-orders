@@ -1,0 +1,32 @@
+repos:
+  - repo: local
+    hooks:
+      - id: debug-check
+        name: Check for debug calls
+        description: This hook checks for any calls to breakpoint or print functions.
+        entry: sh -c 'find . -name "*.py" ! -path "./venv/*" -exec grep -P -Hn "(breakpoint|print)\\s*\\(" {} +; test $? -ne 0'
+        language: system
+        types: [ python ]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.4.1
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+
+  - repo: https://github.com/rubik/xenon
+    rev: v0.9.1
+    hooks:
+      - id: xenon
+        exclude: ^(tests|migrations)/
+        args:
+          - --max-absolute=B
+          - --max-modules=B
+          - --max-average=B
+        description: Analyze code complexity with Xenon
+
+  - repo: https://github.com/jorisroovers/gitlint
+    rev: v0.19.1
+    hooks:
+      - id: gitlint
