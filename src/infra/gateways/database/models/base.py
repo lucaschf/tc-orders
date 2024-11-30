@@ -3,7 +3,7 @@ from datetime import datetime
 from uuid import UUID
 
 from beanie import Document
-from domain.__shared.entity import AggregateRoot
+from src.domain.__shared.entity import AggregateRoot
 
 
 class PersistenceModel[E: AggregateRoot](Document, ABC):
