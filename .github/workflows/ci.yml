@@ -13,7 +13,8 @@ jobs:
         ports:
           - 27017:27017
     env:
-      DB_CONNECTION: localhost
+      MONGO_HOST: mongodb://localhost:27017/
+      DB_CONNECTION: mongo
       DB_NAME: tc-test
       ENVIRONMENT: test
     steps:
