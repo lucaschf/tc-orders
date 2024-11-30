@@ -53,4 +53,4 @@ class CustomerEntityValidatorFactory:
         return CustomerEntityValidator()
 
 
-__all__ = ["CustomerEntityValidator"]
+__all__ = ["CustomerEntityValidatorFactory"]
