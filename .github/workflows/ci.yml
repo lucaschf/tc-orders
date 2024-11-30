@@ -10,6 +10,7 @@ jobs:
     services:
       mongodb:
         image: mongo:7.0.0
+        options: --network-alias mongo
         ports:
           - 27017:27017
     env:
