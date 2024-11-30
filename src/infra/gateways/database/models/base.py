@@ -1,13 +1,14 @@
 from abc import abstractmethod, ABC
 from datetime import datetime
-from uuid import UUID
+from typing import Annotated
 
-from beanie import Document
+from beanie import Document, Indexed
+
 from src.domain.__shared.entity import AggregateRoot
 
 
 class PersistenceModel[E: AggregateRoot](Document, ABC):
-    external_id: UUID
+    external_id: Annotated[str, Indexed(unique=True)]
     created_at: datetime
 
     @staticmethod

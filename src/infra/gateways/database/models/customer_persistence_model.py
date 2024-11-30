@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from src.infra.gateways.database.models.base import PersistenceModel
 from src.domain.__shared.value_objects import (
     ExternalEntityId,
@@ -6,14 +8,15 @@ from src.domain.__shared.value_objects import (
     CPF,
 )
 from bson import ObjectId
+from beanie import Indexed
 
 from src.domain.customer import Customer
 
 
 class CustomerPersistenceModel(PersistenceModel[Customer]):
-    email: str
+    email: Annotated[str, Indexed(unique=True)]
     name: str
-    cpf: str
+    cpf: Annotated[str, Indexed(unique=True)]
 
     @staticmethod
     def from_entity(entity: Customer) -> "CustomerPersistenceModel":
