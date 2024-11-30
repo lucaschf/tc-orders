@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from domain.customer.validator import CustomerEntityValidatorFactory
+from src.domain.customer.validator import CustomerEntityValidatorFactory
 from src.domain.__shared.entity import AggregateRoot
 from src.domain.__shared.validator import ValidationResult
 from src.domain.__shared.value_objects import CPF, EmailAddress
