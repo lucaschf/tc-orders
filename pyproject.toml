@@ -10,7 +10,7 @@ python = "^3.12"
 injector = "^0.22.0"
 pydantic-settings = "^2.6.1"
 pydantic = {extras = ["email"], version = "^2.10.2"}
-bson = "^0.5.10"
+beanie = "^1.27.0"
 
 
 [tool.poetry.group.dev.dependencies]
