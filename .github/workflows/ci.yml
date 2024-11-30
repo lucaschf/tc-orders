@@ -10,10 +10,14 @@ jobs:
     services:
       mongodb:
         image: mongo:7.0.0
+        options: --network-alias mongo
         ports:
           - 27017:27017
     env:
       MONGO_HOST: mongodb://localhost:27017/
+      DB_CONNECTION: mongo
+      DB_NAME: tc-test
+      ENVIRONMENT: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

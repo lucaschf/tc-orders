@@ -11,9 +11,9 @@ from typing import AsyncContextManager
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
-database_models = [
-    # add beanie models here
-]
+from src.infra.gateways.database.models import CustomerPersistenceModel
+
+database_models = [CustomerPersistenceModel]
 
 
 @asynccontextmanager
