@@ -5,7 +5,6 @@ from pydantic import BaseModel, ValidationError
 from pydantic_core import ErrorDetails
 
 from .error_details import ValidationErrorDetails
-from .error_translator import translate_pydantic_error_msg
 from .validator_interface import IValidator, ValidationResult
 
 
@@ -23,10 +22,6 @@ class IPydanticValidator[T](IValidator):
 
     @staticmethod
     def _translate_pydantic_error_msg(error: ErrorDetails) -> str:
-        if custom_message := translate_pydantic_error_msg(error):
-            ctx = error.get("ctx")
-            return custom_message.format(**ctx) if ctx else custom_message
-
         if error.get("type") == "value_error":
             return error["msg"].replace("Value error, ", "")
 
@@ -42,7 +37,9 @@ class IPydanticValidator[T](IValidator):
             ValidationResult: The result of the validation operation.
         """
         try:
-            self.get_pydantic_model().model_validate(obj, strict=True, from_attributes=True)
+            self.get_pydantic_model().model_validate(
+                obj, strict=True, from_attributes=True
+            )
         except ValidationError as err:
             errors = [
                 ValidationErrorDetails(
