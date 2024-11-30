@@ -17,6 +17,11 @@ class MongoCustomerRepository(ICustomerRepository):
     async def find(
         self, cpf: CPF | None, email: EmailAddress | None
     ) -> Customer | None:
+        if not cpf and not email:
+            raise ValueError(
+                "At least one search criteria (CPF or email) must be provided"
+            )
+
         query = {}
         if cpf:
             query["cpf"] = cpf.number
