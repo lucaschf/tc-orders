@@ -2,7 +2,11 @@ from typing import Any
 
 from bson import ObjectId
 
-from src.domain.__shared.validator import IValidator, ValidationErrorDetails, ValidationResult
+from src.domain.__shared.validator import (
+    IValidator,
+    ValidationErrorDetails,
+    ValidationResult,
+)
 
 
 class ObjectIdValidator(IValidator[str]):

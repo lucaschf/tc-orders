@@ -10,7 +10,7 @@ from src.domain.__shared.validator import (
     ValidationErrorDetails,
     ValidationResult,
 )
-from src.domain.__shared.value_object import ExternalEntityId
+from src.domain.__shared.value_objects import ExternalEntityId
 
 
 @dataclass(slots=True)

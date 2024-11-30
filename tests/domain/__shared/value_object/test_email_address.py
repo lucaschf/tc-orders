@@ -1,6 +1,6 @@
 import pytest
 
-from src.domain.__shared.value_object import EmailAddress, InvalidEmailError
+from src.domain.__shared.value_objects import EmailAddress, InvalidEmailError
 
 
 @pytest.mark.parametrize(

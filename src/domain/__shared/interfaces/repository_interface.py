@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from src.domain.__shared.value_object import ExternalEntityId, UniqueEntityId
+from src.domain.__shared.value_objects import ExternalEntityId, UniqueEntityId
 
 
 class IRepository[T](ABC):

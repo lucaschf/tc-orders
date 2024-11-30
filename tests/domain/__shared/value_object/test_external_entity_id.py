@@ -2,7 +2,7 @@ from typing import Any
 
 import pytest
 
-from src.domain.__shared.value_object import ExternalEntityId, InvalidExternalIdError
+from src.domain.__shared.value_objects import ExternalEntityId, InvalidExternalIdError
 
 
 def test_external_entity_id_creation() -> None:

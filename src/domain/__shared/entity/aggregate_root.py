@@ -5,7 +5,7 @@ from typing import Optional
 
 from ..validator import ValidationError, ValidationErrorDetails
 from ..validator.validator_interface import ValidationResult
-from ..value_object import ExternalEntityId, UniqueEntityId
+from ..value_objects import ExternalEntityId, UniqueEntityId
 
 
 @dataclass(kw_only=True, slots=True)

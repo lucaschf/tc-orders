@@ -3,7 +3,7 @@ from dataclasses import dataclass, is_dataclass
 
 import pytest
 
-from src.domain.__shared.value_object import ValueObject
+from src.domain.__shared.value_objects import ValueObject
 
 
 @dataclass(frozen=True, slots=True)

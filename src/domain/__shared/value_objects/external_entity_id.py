@@ -26,7 +26,9 @@ class ExternalEntityId(ValueObject):
 
     def __post_init__(self) -> None:
         """Performs post-initialization validation and normalization of the `id` attribute."""
-        object.__setattr__(self, "id", str(self.id) if isinstance(self.id, UUID) else self.id)
+        object.__setattr__(
+            self, "id", str(self.id) if isinstance(self.id, UUID) else self.id
+        )
         self.__validate()
 
     def __validate(self) -> None:
