@@ -5,6 +5,9 @@ the Beanie data models that represent the MongoDB collection documents.
 Beanie models provide ORM functionality to simplify CRUD operations with the database.
 """
 
+from contextlib import asynccontextmanager
+from typing import AsyncContextManager
+
 from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
@@ -13,7 +16,10 @@ database_models = [
 ]
 
 
-async def initialize_database(db_uri: str, db_name: str) -> None:
+@asynccontextmanager
+async def initialize_database(
+    db_uri: str, db_name: str
+) -> AsyncContextManager[AsyncIOMotorClient]:
     """Initialize the connection with MongoDB and Beanie for document models.
 
     This function performs the following actions:
@@ -32,6 +38,9 @@ async def initialize_database(db_uri: str, db_name: str) -> None:
 
     # Beanie initialization
     await init_beanie(database, document_models=database_models)
+    yield client
+
+    client.close()
 
 
 __all__ = ["initialize_database"]
