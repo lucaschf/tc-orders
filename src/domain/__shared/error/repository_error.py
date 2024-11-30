@@ -35,4 +35,8 @@ class RecordNotFoundInRepositoryError(RepositoryError):
         )
 
 
-__all__ = ["DuplicatedKeyRepositoryError", "RecordNotFoundInRepositoryError", "RepositoryError"]
+__all__ = [
+    "DuplicatedKeyRepositoryError",
+    "RecordNotFoundInRepositoryError",
+    "RepositoryError",
+]
