@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.12"
 injector = "^0.22.0"
 pydantic-settings = "^2.6.1"
+pydantic = {extras = ["email"], version = "^2.10.2"}
+bson = "^0.5.10"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -19,6 +21,7 @@ coverage = "^7.6.8"
 pytest = "^8.3.3"
 gitlint = "^0.19.1"
 xenon = "^0.9.3"
+time-machine = "^2.16.0"
 
 [build-system]
 requires = ["poetry-core"]
