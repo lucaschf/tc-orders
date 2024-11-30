@@ -1,5 +1,5 @@
 from src.infra.gateways.database.models.base import PersistenceModel
-from domain.__shared.value_objects import (
+from src.domain.__shared.value_objects import (
     ExternalEntityId,
     UniqueEntityId,
     EmailAddress,
@@ -7,7 +7,7 @@ from domain.__shared.value_objects import (
 )
 from bson import ObjectId
 
-from domain.customer import Customer
+from src.domain.customer import Customer
 
 
 class CustomerPersistenceModel(PersistenceModel[Customer]):
@@ -19,7 +19,7 @@ class CustomerPersistenceModel(PersistenceModel[Customer]):
     def from_entity(entity: Customer) -> "CustomerPersistenceModel":
         return CustomerPersistenceModel(
             id=ObjectId(entity.id.id) if entity.id else None,
-            external_id=entity.external_id.id,
+            external_id=str(entity.external_id),
             created_at=entity.created_at,
             email=entity.email.address,
             name=entity.name,
