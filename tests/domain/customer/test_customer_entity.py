@@ -1,3 +1,4 @@
+import dataclasses
 from datetime import datetime
 
 import pytest
@@ -15,6 +16,10 @@ def test_customer_creation_successful() -> None:
     email = EmailAddress(address="john.doe@example.com")
 
     customer = Customer(name=name, cpf=cpf, email=email)
+
+    with pytest.raises(dataclasses.FrozenInstanceError):
+        # noinspection PyDataclass
+        customer.name = "Jane Doe"
 
     assert customer.name == name
     assert customer.cpf == cpf
@@ -76,6 +81,23 @@ def test_customer_creation_with_short_name(name: str | None) -> None:
     assert len(exec_info.value.errors) == 1
     assert exec_info.value.errors[0].loc == ("name",)
     assert exec_info.value.errors[0].msg == "String should have at least 3 characters"
+
+
+@pytest.mark.parametrize("name", ["a" * 256, "a" * 257])
+def test_customer_creation_with_long_name(name: str) -> None:
+    cpf_str = CPFProvider.generate_cpf_number()
+
+    with pytest.raises(ValidationError) as exec_info:
+        Customer(
+            name=name,
+            cpf=CPF(number=cpf_str),
+            email=EmailAddress(address="john.doe@example.com"),
+        )
+
+    assert exec_info.value.message == "Validation error"
+    assert len(exec_info.value.errors) == 1
+    assert exec_info.value.errors[0].loc == ("name",)
+    assert exec_info.value.errors[0].msg == "String should have at most 150 characters"
 
 
 def test_customer_creation_with_missing_cpf() -> None:
