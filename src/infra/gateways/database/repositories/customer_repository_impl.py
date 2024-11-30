@@ -1,14 +1,14 @@
 from typing import Optional
 
-from domain.__shared.value_objects import (
+from src.domain.__shared.value_objects import (
     ExternalEntityId,
     UniqueEntityId,
     CPF,
     EmailAddress,
 )
-from domain.customer import Customer
-from domain.customer.repository import ICustomerRepository
-from infra.gateways.database.models import CustomerPersistenceModel
+from src.domain.customer import Customer
+from src.domain.customer.repository import ICustomerRepository
+from src.infra.gateways.database.models import CustomerPersistenceModel
 
 
 class MongoCustomerRepository(ICustomerRepository):
@@ -48,4 +48,4 @@ class MongoCustomerRepository(ICustomerRepository):
         return found.to_entity() if found else None
 
 
-__all__ = ["ICustomerRepository"]
+__all__ = ["MongoCustomerRepository"]

@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 
-from domain.__shared.interfaces import IRepository
-from domain.__shared.value_objects import CPF, EmailAddress
-from domain.customer import Customer
+from src.domain.__shared.interfaces import IRepository
+from src.domain.__shared.value_objects import CPF, EmailAddress
+from src.domain.customer import Customer
 
 
 class ICustomerRepository(IRepository[Customer], ABC):
