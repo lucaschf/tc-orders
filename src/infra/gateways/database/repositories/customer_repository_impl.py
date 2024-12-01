@@ -1,5 +1,6 @@
 from typing import Optional
 
+from src.domain.__shared.error.repository_error import DuplicateKeyError
 from src.domain.__shared.value_objects import (
     ExternalEntityId,
     UniqueEntityId,
@@ -9,6 +10,7 @@ from src.domain.__shared.value_objects import (
 from src.domain.customer import Customer
 from src.domain.customer.repository import ICustomerRepository
 from src.infra.gateways.database.models import CustomerPersistenceModel
+from pymongo.errors import DuplicateKeyError as MongoDuplicateKeyError
 
 
 class MongoCustomerRepository(ICustomerRepository):
@@ -32,8 +34,11 @@ class MongoCustomerRepository(ICustomerRepository):
         return found.to_entity() if found else None
 
     async def insert(self, customer: Customer) -> Customer:
-        persisted = await CustomerPersistenceModel.from_entity(customer).insert()
-        return persisted.to_entity()
+        try:
+            persisted = await CustomerPersistenceModel.from_entity(customer).insert()
+            return persisted.to_entity()
+        except MongoDuplicateKeyError as e:
+            raise DuplicateKeyError() from e
 
     async def find_by_id(self, identifier: str | UniqueEntityId) -> Optional[Customer]:
         found = await CustomerPersistenceModel.get(str(identifier))
