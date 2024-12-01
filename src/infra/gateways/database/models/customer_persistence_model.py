@@ -39,5 +39,8 @@ class CustomerPersistenceModel(PersistenceModel[Customer]):
             cpf=CPF(number=self.cpf),
         )
 
+    class Settings:  # noqa: D106
+        name = "customers"
+
 
 __all__ = ["CustomerPersistenceModel"]
