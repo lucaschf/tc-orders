@@ -25,6 +25,7 @@ class CreateCustomerUseCase:
 
         Raises:
             DomainError: If the customer already exists.
+            ValidationError: If the customer data is invalid.
         """
         customer = Customer(
             name=customer_data.name, cpf=customer_data.cpf, email=customer_data.email
