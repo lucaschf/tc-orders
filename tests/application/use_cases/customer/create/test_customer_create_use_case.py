@@ -17,7 +17,6 @@ async def test_create_customer_success() -> None:
     customer_repository_mock = Mock(spec=ICustomerRepository)
     create_customer_use_case_fx = CreateCustomerUseCase(customer_repository_mock)
 
-    customer_repository_mock.find.return_value = None
     customer_data = CustomerCreationDTO(
         name="John Doe",
         email=EmailAddress(address="some@example.com"),
