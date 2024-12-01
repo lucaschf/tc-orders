@@ -7,6 +7,7 @@ from src.application.use_cases.customer.create import (
     CustomerCreationDTO,
     CustomerCreatedDTO,
 )
+from src.application.use_cases.customer.get_by_cpf import CustomerDTO
 from src.domain.__shared.value_objects import CPF, EmailAddress
 
 
@@ -49,7 +50,7 @@ class CustomerDetailsOut(CustomerSummaryOut):
     created_at: datetime = Field(description="The customer creation date")
 
     @staticmethod
-    def from_dto(dto: CustomerCreatedDTO) -> "CustomerDetailsOut":
+    def from_dto(dto: CustomerCreatedDTO | CustomerDTO) -> "CustomerDetailsOut":
         return CustomerDetailsOut(
             name=dto.name,
             cpf=CPFStr(dto.cpf.number),

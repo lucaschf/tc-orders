@@ -3,6 +3,7 @@ from http import HTTPStatus
 from fastapi import Request
 from starlette.responses import JSONResponse, Response
 
+from src.application.error import NotFoundError
 from src.domain.__shared.error import DomainError
 from src.domain.__shared.validator import ValidationError as DomainValidationError
 
@@ -39,6 +40,32 @@ def domain_validation_exception_handler(_request: Request, exc: Exception) -> Re
                     for e in exc.errors
                 ]
             },
+        )
+
+    raise exc
+
+
+def not_found_exception_handler(_request: Request, exc: Exception) -> Response:
+    """Handles NotFound exceptions.
+
+    This handler is designed to manage `NotFoundError` exceptions, which
+    represent errors due to an entity not found.
+    It generates a JSON response with a 404 Not Found status code and the error message.
+
+    Args:
+        _request: The incoming FastAPI request object (unused in this handler).
+        exc: The exception object, expected to be a `NotFoundError`.
+
+    Returns:
+        A JSON response containing the error message.
+
+    Raises:
+        exc: Re-raises any other exception type for further handling.
+    """
+    if isinstance(exc, NotFoundError):
+        return JSONResponse(
+            status_code=HTTPStatus.NOT_FOUND,
+            content={"detail": exc.message},
         )
 
     raise exc
@@ -99,4 +126,5 @@ __all__ = [
     "domain_exception_handler",
     "domain_validation_exception_handler",
     "general_exception_handler",
+    "not_found_exception_handler",
 ]

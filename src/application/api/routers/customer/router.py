@@ -7,8 +7,10 @@ from src.application.api.routers.customer.schemas import (
     CustomerDetailsOut,
 )
 from src.application.api.schemas import HttpErrorOut
+from src.application.api.types import CPFStr
 from src.application.di import dependency_injector
 from src.application.use_cases.customer.create import CreateCustomerUseCase
+from src.application.use_cases.customer.get_by_cpf import GetCustomerByCpfUseCase
 
 router = APIRouter(tags=["Customer"], prefix="/customer")
 
@@ -31,6 +33,22 @@ async def create_customer(
         inputs.to_customer_creation_data()
     )
     response.headers["Location"] = f"{router.prefix}/{customer.cpf}"
+    return CustomerDetailsOut.from_dto(customer)
+
+
+@router.get(
+    "/{cpf}",
+    responses={404: {"model": HttpErrorOut}, 400: {"model": HttpErrorOut}},
+    description="Retrieves a customer from the system using their CPF. The CPF is passed as a path "
+    "parameter.",
+)
+async def get_by_cpf(
+    cpf: CPFStr,
+    get_customer_use_case: GetCustomerByCpfUseCase = Depends(  # noqa: B008
+        lambda: dependency_injector.get(GetCustomerByCpfUseCase)
+    ),
+) -> CustomerDetailsOut:
+    customer = await get_customer_use_case.execute(cpf)
     return CustomerDetailsOut.from_dto(customer)
 
 

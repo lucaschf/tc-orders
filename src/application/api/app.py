@@ -8,9 +8,11 @@ from .exception_handlers import (
     domain_exception_handler,
     domain_validation_exception_handler,
     general_exception_handler,
+    not_found_exception_handler,
 )
 from .middlewares import setup_cors
 from .routers import register_routes
+from ..error import NotFoundError
 from ...domain.__shared.error import DomainError
 from ...domain.__shared.validator import ValidationError as DomainValidationError
 from ...infra.gateways.database.setup import initialize_database
@@ -53,6 +55,7 @@ register_routes(app)
 setup_cors(app, ["*"])  # allow all origins for now
 
 app.add_exception_handler(DomainValidationError, domain_validation_exception_handler)
+app.add_exception_handler(NotFoundError, not_found_exception_handler)
 app.add_exception_handler(DomainError, domain_exception_handler)
 app.add_exception_handler(Exception, general_exception_handler)
 
