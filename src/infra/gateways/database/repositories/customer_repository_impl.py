@@ -38,7 +38,7 @@ class MongoCustomerRepository(ICustomerRepository):
             persisted = await CustomerPersistenceModel.from_entity(customer).insert()
             return persisted.to_entity()
         except MongoDuplicateKeyError as e:
-            raise DuplicateKeyError(str(e)) from e
+            raise DuplicateKeyError(message=str(e)) from e
 
     async def find_by_id(self, identifier: str | UniqueEntityId) -> Optional[Customer]:
         found = await CustomerPersistenceModel.get(str(identifier))
