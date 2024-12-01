@@ -12,14 +12,14 @@ class RepositoryError(DomainError):
 
 
 @dataclass(frozen=True, kw_only=True, slots=True)
-class DuplicatedKeyRepositoryError(RepositoryError):
+class DuplicateKeyError(RepositoryError):
     """Raised when a record with a duplicated key is attempted to be inserted."""
 
     message: str = "Chave duplicada encontrada"
 
 
 @dataclass(frozen=True, kw_only=True, slots=True)
-class RecordNotFoundInRepositoryError(RepositoryError):
+class RecordNotFoundError(RepositoryError):
     """Raised when an entity is not found in the repository."""
 
     message: str = "Registro não encontrado"
@@ -36,7 +36,7 @@ class RecordNotFoundInRepositoryError(RepositoryError):
 
 
 __all__ = [
-    "DuplicatedKeyRepositoryError",
-    "RecordNotFoundInRepositoryError",
+    "DuplicateKeyError",
+    "RecordNotFoundError",
     "RepositoryError",
 ]
