@@ -50,7 +50,7 @@ app = FastAPI(
 )
 
 register_routes(app)
-setup_cors(app, settings.ALLOWED_ORIGINS)
+setup_cors(app, ["*"])  # allow all origins for now
 
 app.add_exception_handler(DomainValidationError, domain_validation_exception_handler)
 app.add_exception_handler(DomainError, domain_exception_handler)

@@ -25,8 +25,5 @@ class Settings(BaseSettings):
     DB_NAME: str
     """The name of the database."""
 
-    ALLOWED_ORIGINS: list[str]
-    """The allowed origins for CORS."""
-
 
 __all__ = ["Settings"]
