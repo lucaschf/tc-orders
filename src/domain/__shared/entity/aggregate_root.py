@@ -8,7 +8,7 @@ from ..validator.validator_interface import ValidationResult
 from ..value_objects import ExternalEntityId, UniqueEntityId
 
 
-@dataclass(kw_only=True, slots=True, frozen=True)
+@dataclass(kw_only=True, slots=True)
 class AggregateRoot(ABC):
     """Base class for aggregate roots.
 
