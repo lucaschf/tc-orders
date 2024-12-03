@@ -1,4 +1,3 @@
-import dataclasses
 from datetime import datetime
 
 import pytest
@@ -16,10 +15,6 @@ def test_customer_creation_successful() -> None:
     email = EmailAddress(address="john.doe@example.com")
 
     customer = Customer(name=name, cpf=cpf, email=email)
-
-    with pytest.raises(dataclasses.FrozenInstanceError):
-        # noinspection PyDataclass
-        customer.name = "Jane Doe"
 
     assert customer.name == name
     assert customer.cpf == cpf

@@ -13,7 +13,7 @@ from src.domain.__shared.validator import (
 from src.domain.__shared.value_objects import ExternalEntityId
 
 
-@dataclass(slots=True, frozen=True)
+@dataclass(slots=True)
 class StubEntity(AggregateRoot):
     def validate(self) -> ValidationResult:  # noqa: D102
         return ValidationResult(is_valid=True)
@@ -56,7 +56,7 @@ def test_aggregate_root_calls_validate() -> None:
     mock_validate.assert_called_once()
 
 
-@dataclass(kw_only=True, slots=True, frozen=True)
+@dataclass(kw_only=True, slots=True)
 class StubCustomerEntity(AggregateRoot):
     name: str
 

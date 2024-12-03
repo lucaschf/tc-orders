@@ -6,7 +6,7 @@ from src.domain.__shared.validator import ValidationResult
 from src.domain.__shared.value_objects import CPF, EmailAddress
 
 
-@dataclass(kw_only=True, slots=True, frozen=True)
+@dataclass(kw_only=True, slots=True)
 class Customer(AggregateRoot):
     """Represents a customer in the system.
 
