@@ -1,7 +1,7 @@
-from src.application.use_cases.customer.error import CustomerNotFoundError
 from src.application.use_cases.customer.get_by_cpf.dto import CustomerDTO
 from src.domain.__shared.value_objects import CPF
 from src.domain.customer import ICustomerRepository
+from src.domain.customer_error import CustomerNotFoundError
 
 
 class GetCustomerByCpfUseCase:
