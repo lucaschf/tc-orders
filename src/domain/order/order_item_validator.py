@@ -6,7 +6,6 @@ from src.domain.__shared.validator import IValidator
 from src.domain.__shared.validator.pydantic_validator import (
     IPydanticValidator,
 )
-from src.domain.__shared.value_objects import UniqueEntityId
 
 
 class OrderItemValidationRule(BaseModel):
@@ -18,7 +17,7 @@ class OrderItemValidationRule(BaseModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    product_id: UniqueEntityId
+    product_id: str
     quantity: int
     value: float
 

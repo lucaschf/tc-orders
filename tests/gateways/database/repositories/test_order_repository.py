@@ -31,7 +31,7 @@ async def test_list_all_returns_orders(initialize_database_fx):
                 status=OrderStatus.PAYMENT_PENDING,
                 items=[
                     OrderItemPersistenceModel(
-                        product_id=PydanticObjectId(),
+                        product_id="89787",
                         external_id=str(ExternalEntityId()),
                         quantity=1,
                         value=100.0,
@@ -48,7 +48,7 @@ async def test_list_all_returns_orders(initialize_database_fx):
                 status=OrderStatus.COMPLETED,
                 items=[
                     OrderItemPersistenceModel(
-                        product_id=PydanticObjectId(),
+                        product_id="21313",
                         external_id=str(ExternalEntityId()),
                         quantity=1,
                         value=100.0,
@@ -79,7 +79,7 @@ async def test_insert_saves_order(initialize_database_fx):
             items=[
                 OrderItem(
                     external_id=ExternalEntityId(),
-                    product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+                    product_id="1u2381638",
                     quantity=1,
                     value=100.0,
                 )
@@ -108,7 +108,7 @@ async def test_insert_raises_duplicate_key_error(initialize_database_fx):
             items=[
                 OrderItem(
                     external_id=ExternalEntityId(),
-                    product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+                    product_id="12313",
                     quantity=1,
                     value=100.0,
                 )
@@ -137,7 +137,7 @@ async def test_find_by_id_returns_order(initialize_database_fx):
                 items=[
                     OrderItem(
                         external_id=ExternalEntityId(),
-                        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+                        product_id="12313",
                         quantity=1,
                         value=100.0,
                     )
@@ -178,7 +178,7 @@ async def test_find_by_external_id_returns_order(initialize_database_fx):
                 items=[
                     OrderItem(
                         external_id=ExternalEntityId(),
-                        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+                        product_id="12390",
                         quantity=1,
                         value=100.0,
                     )

@@ -9,7 +9,7 @@ from tests.__providers import UniqueEntityIdProvider
 def test_add_item_increases_total_value() -> None:
     order = Order(customer_id=UniqueEntityIdProvider.generate_unique_entity_id())
     item = OrderItem(
-        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+        product_id="1231312",
         quantity=2,
         value=50.0,
     )
@@ -21,13 +21,13 @@ def test_remove_item_decreases_total_value() -> None:
     order = Order(customer_id=UniqueEntityIdProvider.generate_unique_entity_id())
     item1 = OrderItem(
         _id=UniqueEntityIdProvider.generate_unique_entity_id(),
-        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+        product_id="1231312",
         quantity=2,
         value=50,
     )
     item2 = OrderItem(
         _id=UniqueEntityIdProvider.generate_unique_entity_id(),
-        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+        product_id="12313122",
         quantity=1,
         value=30,
     )
@@ -40,12 +40,12 @@ def test_remove_item_decreases_total_value() -> None:
 def test_calculate_total_returns_correct_value() -> None:
     order = Order(customer_id=UniqueEntityIdProvider.generate_unique_entity_id())
     item1 = OrderItem(
-        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+        product_id="1231312",
         quantity=2,
         value=50,
     )
     item2 = OrderItem(
-        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+        product_id="12313124",
         quantity=1,
         value=30,
     )
@@ -57,7 +57,7 @@ def test_calculate_total_returns_correct_value() -> None:
 def test_validate_order_with_valid_attributes() -> None:
     order = Order(customer_id=UniqueEntityIdProvider.generate_unique_entity_id())
     item = OrderItem(
-        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+        product_id="1231312",
         quantity=2,
         value=50,
     )
@@ -69,7 +69,7 @@ def test_validate_order_with_valid_attributes() -> None:
 def test_validate_order_with_invalid_attributes() -> None:
     order = Order(customer_id=UniqueEntityIdProvider.generate_unique_entity_id())
     item = OrderItem(
-        product_id=UniqueEntityIdProvider.generate_unique_entity_id(),
+        product_id="1231312",
         quantity=-1,
         value=50,
     )

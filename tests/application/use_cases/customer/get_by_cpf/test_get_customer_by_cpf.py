@@ -5,10 +5,10 @@ from unittest.mock import AsyncMock
 from src.application.use_cases.customer.get_by_cpf.get_customer_by_cpf_use_case import (
     GetCustomerByCpfUseCase,
 )
-from src.application.use_cases.customer.error import CustomerNotFoundError
 from src.application.use_cases.customer.get_by_cpf.dto import CustomerDTO
 from src.domain.__shared.value_objects import CPF, EmailAddress
 from src.domain.customer import Customer, ICustomerRepository
+from src.domain.customer_error import CustomerNotFoundError
 from tests.__providers import UniqueEntityIdProvider
 
 

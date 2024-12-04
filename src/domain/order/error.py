@@ -13,4 +13,11 @@ class InvalidStatusTransitionError(DomainError):
     message: str = "Invalid status transition"
 
 
-__all__ = ["InvalidStatusTransitionError"]
+@dataclass(kw_only=True, frozen=True)
+class EmptyOrderError(DomainError):
+    """Raised when an order is empty."""
+
+    message: str = "Empty order"
+
+
+__all__ = ["InvalidStatusTransitionError", "EmptyOrderError"]

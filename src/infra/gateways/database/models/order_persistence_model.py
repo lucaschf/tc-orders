@@ -12,14 +12,14 @@ from src.infra.gateways.database.models.base import PersistenceModel
 
 
 class OrderItemPersistenceModel(PersistenceModel[OrderItem]):
-    product_id: PydanticObjectId
+    product_id: str
     quantity: int
     value: float
 
     @staticmethod
     def from_entity(entity: OrderItem) -> "OrderItemPersistenceModel":
         return OrderItemPersistenceModel(
-            product_id=PydanticObjectId(entity.product_id.id),
+            product_id=entity.product_id,
             quantity=entity.quantity,
             value=entity.value,
             created_at=entity.created_at,
@@ -30,7 +30,7 @@ class OrderItemPersistenceModel(PersistenceModel[OrderItem]):
 
     def to_entity(self) -> OrderItem:
         return OrderItem(
-            product_id=UniqueEntityId(str(self.product_id)),
+            product_id=self.product_id,
             quantity=self.quantity,
             value=self.value,
             created_at=self.created_at,
